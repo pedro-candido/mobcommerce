@@ -34,4 +34,23 @@ describe("Input", () => {
 
     expect(onChangeText).toHaveBeenCalledTimes(1);
   });
+
+  it("should show password", () => {
+    const input = render(<Input secureTextEntry />);
+    const showPassword = input.getByTestId("showPassword");
+
+    showPassword.props.onPress();
+
+    expect(input.getByTestId("input").props.secureTextEntry).toBeFalsy();
+  });
+
+  it("should hide password", () => {
+    const input = render(<Input secureTextEntry />);
+    const showPassword = input.getByTestId("showPassword");
+
+    showPassword.props.onPress();
+    showPassword.props.onPress();
+
+    expect(input.getByTestId("input").props.secureTextEntry).toBeTruthy();
+  });
 });
